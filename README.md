@@ -48,15 +48,15 @@ You can install Postman via this website: https://www.postman.com/downloads/
     (You might want to use `cargo check` if you only need to verify your work without running the app.)
 
 ## Mandatory Checklists (Publisher)
--   [ ] Clone https://gitlab.com/ichlaffterlalu/bambangshop to a new repository.
+-   [x] Clone https://gitlab.com/ichlaffterlalu/bambangshop to a new repository.
 -   **STAGE 1: Implement models and repositories**
-    -   [ ] Commit: `Create Subscriber model struct.`
-    -   [ ] Commit: `Create Notification model struct.`
-    -   [ ] Commit: `Create Subscriber database and Subscriber repository struct skeleton.`
-    -   [ ] Commit: `Implement add function in Subscriber repository.`
-    -   [ ] Commit: `Implement list_all function in Subscriber repository.`
-    -   [ ] Commit: `Implement delete function in Subscriber repository.`
-    -   [ ] Write answers of your learning module's "Reflection Publisher-1" questions in this README.
+    -   [x] Commit: `Create Subscriber model struct.`
+    -   [x] Commit: `Create Notification model struct.`
+    -   [x] Commit: `Create Subscriber database and Subscriber repository struct skeleton.`
+    -   [x] Commit: `Implement add function in Subscriber repository.`
+    -   [x] Commit: `Implement list_all function in Subscriber repository.`
+    -   [x] Commit: `Implement delete function in Subscriber repository.`
+    -   [x] Write answers of your learning module's "Reflection Publisher-1" questions in this README.
 -   **STAGE 2: Implement services and controllers**
     -   [ ] Commit: `Create Notification service struct skeleton.`
     -   [ ] Commit: `Implement subscribe function in Notification service.`
@@ -77,6 +77,9 @@ This is the place for you to write reflections:
 ### Mandatory (Publisher) Reflections
 
 #### Reflection Publisher-1
+1. In the Observer design pattern, choosing between an interface (or a trait in Rust) and a single Model struct for the BambangShop application depends on how simple or complex the system needs to be. If every subscriber to updates behaves the same way, then just one Model struct could be enough, which keeps things simple. However, if BambangShop might need to handle different kinds of subscribers later on, each reacting differently, it's better to use a trait. This makes the system more flexible and easier to update because new kinds of subscribers can be added without changing how the main system works. Using a trait helps keep different parts of the system separate, which is a key goal of the Observer pattern. This setup makes it easier to manage and extend the system as it grows.
+2. Using a Vec (a type of list) to store unique IDs and URLs in the BambangShop application would mean you have to check every time you add a new one to make sure it's not already there, which can be slow and easy to mess up, especially if the list gets long. Instead, using a DashMap, which is a special type of dictionary in Rust, is a better choice. DashMap automatically prevents adding duplicates and lets you quickly find and update entries. It can also handle many users adding or changing data at the same time without slowing down, which is great for busy apps. So, for managing unique IDs and URLs efficiently and safely, DashMap is the way to go instead of a Vec.
+3. In Rust programming, making sure programs are safe to run with multiple threads at the same time is very important. We use DashMap for storing a list of subscribers because it's specifically designed to handle multiple threads safely and efficiently. Although we could use the Singleton pattern, which ensures that only one instance of a class is created, it doesn't automatically handle thread safety. This means that if we used Singleton, we'd need extra steps to make sure it's safe when multiple threads access it, which can make things more complicated. DashMap, on the other hand, is built to be thread-safe right from the start, which makes it a better choice for handling data that multiple threads need to access simultaneously in Rust.
 
 #### Reflection Publisher-2
 
